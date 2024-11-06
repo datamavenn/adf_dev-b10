@@ -1,1 +1,10 @@
-{}
+{
+	"TargetContainer": {
+		"type": "string",
+		"value": "sourcegen2container"
+	},
+	"filepath": {
+		"type": "string",
+		"value": "target"
+	}
+}
