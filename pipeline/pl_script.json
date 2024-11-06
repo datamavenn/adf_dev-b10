@@ -1,0 +1,56 @@
+{
+	"name": "pl_script",
+	"properties": {
+		"activities": [
+			{
+				"name": "Script1",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "ls_source_sql_server",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "PRINT 'start of the statement'\nselect * from employees\nPRINT 'end of the statement'"
+						},
+						{
+							"type": "NonQuery",
+							"text": "-- Drop the table if it exists\nIF OBJECT_ID('dbo.script', 'U') IS NOT NULL\n    DROP TABLE dbo.script;\n\n-- Create the table\ncreate table dbo.script( tableName Varchar(50), tableType  Varchar(10))"
+						},
+						{
+							"parameters": [
+								{
+									"name": "PlayerName",
+									"type": "String",
+									"value": "Rohit",
+									"direction": "Input"
+								},
+								{
+									"name": "Team",
+									"type": "String",
+									"value": "MI",
+									"direction": "Input"
+								}
+							],
+							"type": "Query",
+							"text": "select * from iplteams where name=@PlayerName AND team=@Team"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
