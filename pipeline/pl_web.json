@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"method": "GET",
-					"url": "https://dummyapi.online/api/movies"
+					"url": "https://datausa.io/api/data?drilldowns=Nation&measures=Population"
 				}
 			},
 			{
@@ -38,7 +38,7 @@
 				"typeProperties": {
 					"variableName": "webVar",
 					"value": {
-						"value": "@{activity('Web1').output}",
+						"value": "@{activity('Web1').output.data}",
 						"type": "Expression"
 					}
 				}
@@ -104,9 +104,9 @@
 									"type": "String"
 								},
 								"sink": {
-									"name": "webColumn",
 									"type": "String",
-									"physicalType": "String"
+									"physicalType": "String",
+									"ordinal": 1
 								}
 							}
 						],
