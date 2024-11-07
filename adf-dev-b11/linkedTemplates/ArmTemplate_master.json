@@ -19,6 +19,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_source_sql_server'"
 		},
+		"ls_restapi_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://reqres.in/api/users"
+		},
 		"ls_source_adls_gen2_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsgen2b11.dfs.core.windows.net/"
@@ -71,6 +75,9 @@
 					"ls_source_sql_server_password": {
 						"value": "[parameters('ls_source_sql_server_password')]"
 					},
+					"ls_restapi_properties_typeProperties_url": {
+						"value": "[parameters('ls_restapi_properties_typeProperties_url')]"
+					},
 					"ls_source_adls_gen2_properties_typeProperties_url": {
 						"value": "[parameters('ls_source_adls_gen2_properties_typeProperties_url')]"
 					},
@@ -86,6 +93,26 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "adf-dev-b11_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-dev-b11_ArmTemplate_0')]"
+			]
 		}
 	]
 }
