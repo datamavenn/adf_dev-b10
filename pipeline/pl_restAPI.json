@@ -1,0 +1,205 @@
+{
+	"name": "pl_restAPI",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": "https://reqres.in/api/users?page=1"
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(1,activity('Web1').output.total_pages)",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy data1",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "RestSource",
+									"httpRequestTimeout": "00:01:40",
+									"requestInterval": "00.00:00:00.010",
+									"requestMethod": "GET",
+									"paginationRules": {
+										"supportRFC5988": "true"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"mappings": [
+										{
+											"source": {
+												"path": "$['page']"
+											},
+											"sink": {
+												"ordinal": 1
+											}
+										},
+										{
+											"source": {
+												"path": "$['per_page']"
+											},
+											"sink": {
+												"ordinal": 2
+											}
+										},
+										{
+											"source": {
+												"path": "$['total']"
+											},
+											"sink": {
+												"ordinal": 3
+											}
+										},
+										{
+											"source": {
+												"path": "$['total_pages']"
+											},
+											"sink": {
+												"ordinal": 4
+											}
+										},
+										{
+											"source": {
+												"path": "$['data'][0]['id']"
+											},
+											"sink": {
+												"ordinal": 5
+											}
+										},
+										{
+											"source": {
+												"path": "$['data'][0]['email']"
+											},
+											"sink": {
+												"ordinal": 6
+											}
+										},
+										{
+											"source": {
+												"path": "$['data'][0]['first_name']"
+											},
+											"sink": {
+												"ordinal": 7
+											}
+										},
+										{
+											"source": {
+												"path": "$['data'][0]['last_name']"
+											},
+											"sink": {
+												"ordinal": 8
+											}
+										},
+										{
+											"source": {
+												"path": "$['data'][0]['avatar']"
+											},
+											"sink": {
+												"ordinal": 9
+											}
+										},
+										{
+											"source": {
+												"path": "$['support']['url']"
+											},
+											"sink": {
+												"ordinal": 10
+											}
+										},
+										{
+											"source": {
+												"path": "$['support']['text']"
+											},
+											"sink": {
+												"ordinal": 11
+											}
+										}
+									]
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_source_restAPI",
+									"type": "DatasetReference",
+									"parameters": {
+										"PageNumber": {
+											"value": "?page=@{item()}",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_target_restAPI",
+									"type": "DatasetReference",
+									"parameters": {
+										"APIPage": {
+											"value": "RestAPIPage@{item()}.csv",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"RestApiVariable": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

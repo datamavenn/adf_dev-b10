@@ -1,0 +1,23 @@
+{
+	"name": "ds_source_restAPI",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_restapi",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"PageNumber": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@dataset().PageNumber",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	}
+}
