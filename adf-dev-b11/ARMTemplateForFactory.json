@@ -283,7 +283,7 @@
 											"mappings": [
 												{
 													"source": {
-														"path": "$['page']"
+														"path": "[['id']"
 													},
 													"sink": {
 														"ordinal": 1
@@ -291,7 +291,7 @@
 												},
 												{
 													"source": {
-														"path": "$['per_page']"
+														"path": "[['email']"
 													},
 													"sink": {
 														"ordinal": 2
@@ -299,7 +299,7 @@
 												},
 												{
 													"source": {
-														"path": "$['total']"
+														"path": "[['first_name']"
 													},
 													"sink": {
 														"ordinal": 3
@@ -307,7 +307,7 @@
 												},
 												{
 													"source": {
-														"path": "$['total_pages']"
+														"path": "[['last_name']"
 													},
 													"sink": {
 														"ordinal": 4
@@ -315,61 +315,14 @@
 												},
 												{
 													"source": {
-														"path": "$['data'][0]['id']"
+														"path": "[['avatar']"
 													},
 													"sink": {
 														"ordinal": 5
 													}
-												},
-												{
-													"source": {
-														"path": "$['data'][0]['email']"
-													},
-													"sink": {
-														"ordinal": 6
-													}
-												},
-												{
-													"source": {
-														"path": "$['data'][0]['first_name']"
-													},
-													"sink": {
-														"ordinal": 7
-													}
-												},
-												{
-													"source": {
-														"path": "$['data'][0]['last_name']"
-													},
-													"sink": {
-														"ordinal": 8
-													}
-												},
-												{
-													"source": {
-														"path": "$['data'][0]['avatar']"
-													},
-													"sink": {
-														"ordinal": 9
-													}
-												},
-												{
-													"source": {
-														"path": "$['support']['url']"
-													},
-													"sink": {
-														"ordinal": 10
-													}
-												},
-												{
-													"source": {
-														"path": "$['support']['text']"
-													},
-													"sink": {
-														"ordinal": 11
-													}
 												}
-											]
+											],
+											"collectionReference": "$['data']"
 										}
 									},
 									"inputs": [
