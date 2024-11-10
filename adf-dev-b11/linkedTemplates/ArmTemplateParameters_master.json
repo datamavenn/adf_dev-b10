@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adf-dev-b11"
 		},
+		"ls_Target_Database_connectionString": {
+			"value": ""
+		},
 		"ls_blob_storage_connectionString": {
 			"value": ""
 		},
