@@ -1,0 +1,30 @@
+{
+	"name": "ds_source_incrementalLoad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_sql_server",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"TableSchema": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().TableSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
