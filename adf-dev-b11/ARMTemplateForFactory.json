@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_source_sql_server'"
 		},
+		"ls_target_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_target_db'"
+		},
 		"ls_restapi_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://reqres.in/api/users"
@@ -206,7 +210,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pl_increamentalLoad')]",
+			"name": "[concat(parameters('factoryName'), '/pl_incremental')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -309,7 +313,7 @@
 										"source": {
 											"type": "AzureSqlSource",
 											"sqlReaderQuery": {
-												"value": "select * from @{item().tableName} where @{item().WaterMark_Column} >'@{formatDateTime(activity('OldWaterMark').output.firstRow.WatermarkValue, 'yyyy-MM-ddTHH:mm:ss')}' AND @{item().WaterMark_Column} <= '@{formatDateTime(activity('NewWaterMark').output.firstRow.NewWatermarkvalue, 'yyyy-MM-ddTHH:mm:ss')}'\n",
+												"value": "select * from @{item().tableName} where @{item().WaterMark_Column} >'@{formatDateTime(activity('OldWaterMark').output.firstRow.WatermarkValue, 'yyyy-MM-ddTHH:mm:ss')}' AND @{item().WaterMark_Column} <= '@{formatDateTime(activity('NewWaterMark').output.firstRow.NewWatermarkvalue, 'yyyy-MM-ddTHH:mm:ss')}'",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -363,7 +367,7 @@
 													"type": "Expression"
 												},
 												"TableName": {
-													"value": "@item().tableName",
+													"value": "@item().TableName",
 													"type": "Expression"
 												}
 											}
@@ -441,9 +445,6 @@
 							}
 						]
 					}
-				},
-				"folder": {
-					"name": "loadTypes"
 				},
 				"annotations": []
 			},
@@ -1314,7 +1315,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "ls_Target_Database",
+					"referenceName": "ls_target_db",
 					"type": "LinkedServiceReference"
 				},
 				"parameters": {
@@ -1340,7 +1341,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_Target_Database')]"
+				"[concat(variables('factoryId'), '/linkedServices/ls_target_db')]"
 			]
 		},
 		{
@@ -1534,6 +1535,19 @@
 						"type": "SecureString",
 						"value": "[parameters('ls_source_sql_server_password')]"
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_target_db')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_target_db_connectionString')]"
 				}
 			},
 			"dependsOn": []

@@ -17,6 +17,9 @@
 		"ls_source_sql_server_password": {
 			"value": ""
 		},
+		"ls_target_db_connectionString": {
+			"value": ""
+		},
 		"ls_restapi_properties_typeProperties_url": {
 			"value": "https://reqres.in/api/users"
 		},

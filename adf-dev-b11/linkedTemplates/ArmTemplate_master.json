@@ -23,6 +23,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'ls_source_sql_server'"
 		},
+		"ls_target_db_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_target_db'"
+		},
 		"ls_restapi_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://reqres.in/api/users"
@@ -81,6 +85,9 @@
 					},
 					"ls_source_sql_server_password": {
 						"value": "[parameters('ls_source_sql_server_password')]"
+					},
+					"ls_target_db_connectionString": {
+						"value": "[parameters('ls_target_db_connectionString')]"
 					},
 					"ls_restapi_properties_typeProperties_url": {
 						"value": "[parameters('ls_restapi_properties_typeProperties_url')]"
