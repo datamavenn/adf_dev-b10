@@ -1,0 +1,17 @@
+{
+	"name": "pl_custom_fullLoad",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": []
+			}
+		],
+		"folder": {
+			"name": "LoadTypes"
+		},
+		"annotations": []
+	}
+}
