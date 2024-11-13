@@ -1,0 +1,19 @@
+{
+	"name": "daily_trigger",
+	"properties": {
+		"description": "Daily trigger for sales",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 10,
+				"startTime": "2024-11-13T20:33:00",
+				"endTime": "2024-12-02T20:56:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
