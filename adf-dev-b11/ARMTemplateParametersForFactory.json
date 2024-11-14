@@ -34,6 +34,12 @@
 		},
 		"ls_source_sql_server_properties_typeProperties_userName": {
 			"value": "ahaana"
+		},
+		"TumblingWindowTrigger_properties_pipeline_parameters_StartDate": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"TumblingWindowTrigger_properties_pipeline_parameters_EndDate": {
+			"value": "@trigger().outputs.windowEndTime"
 		}
 	}
 }
