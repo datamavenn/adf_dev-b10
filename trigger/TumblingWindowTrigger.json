@@ -1,0 +1,21 @@
+{
+	"name": "TumblingWindowTrigger",
+	"properties": {
+		"description": "TumblingWindowTrigger pipeline",
+		"annotations": [],
+		"runtimeState": "Started",
+		"type": "TumblingWindowTrigger",
+		"typeProperties": {
+			"frequency": "Hour",
+			"interval": 24,
+			"startTime": "2024-11-03T20:12:00Z",
+			"endTime": "2024-11-09T20:12:00Z",
+			"delay": "00:00:00",
+			"maxConcurrency": 50,
+			"retryPolicy": {
+				"intervalInSeconds": 30
+			},
+			"dependsOn": []
+		}
+	}
+}
