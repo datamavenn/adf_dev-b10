@@ -54,6 +54,14 @@
 		"TumblingWindowTrigger_properties_pipeline_parameters_EndDate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://adf-keyvault-b10.vault.azure.net/"
+		},
+		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sql-b10-secret"
 		}
 	},
 	"variables": {
@@ -2183,6 +2191,41 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_copy_sql_table')]",
 				"[concat(variables('factoryId'), '/pipelines/pl_script')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVaultforSQL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVaultforSQL_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_keyvault_sql')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVaultforSQL",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('ls_keyvault_sql_properties_typeProperties_connectionString_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVaultforSQL')]"
 			]
 		}
 	]

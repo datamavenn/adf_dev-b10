@@ -46,6 +46,10 @@
 		"ls_source_sql_server_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "ahaana"
+		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://adf-keyvault-b10.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -141,6 +145,19 @@
 				"type": "AzureSqlDatabase",
 				"typeProperties": {
 					"connectionString": "[parameters('ls_target_db_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVaultforSQL')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVaultforSQL_properties_typeProperties_baseUrl')]"
 				}
 			},
 			"dependsOn": []
@@ -553,41 +570,6 @@
 				"typeProperties": {
 					"schema": {
 						"value": "@dataset().TableSchemaName",
-						"type": "Expression"
-					},
-					"table": {
-						"value": "@dataset().TableName",
-						"type": "Expression"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_target_db')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_target_custom_last7days')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_target_db",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"SchemaName": {
-						"type": "string"
-					},
-					"TableName": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": {
-						"value": "@dataset().SchemaName",
 						"type": "Expression"
 					},
 					"table": {

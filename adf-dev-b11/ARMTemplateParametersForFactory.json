@@ -40,6 +40,12 @@
 		},
 		"TumblingWindowTrigger_properties_pipeline_parameters_EndDate": {
 			"value": "@trigger().outputs.windowEndTime"
+		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"value": "https://adf-keyvault-b10.vault.azure.net/"
+		},
+		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+			"value": "sql-b10-secret"
 		}
 	}
 }

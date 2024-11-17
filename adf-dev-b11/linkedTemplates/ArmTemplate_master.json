@@ -55,6 +55,14 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndTime"
 		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://adf-keyvault-b10.vault.azure.net/"
+		},
+		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+			"type": "string",
+			"defaultValue": "sql-b10-secret"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -111,6 +119,9 @@
 					},
 					"ls_source_sql_server_properties_typeProperties_userName": {
 						"value": "[parameters('ls_source_sql_server_properties_typeProperties_userName')]"
+					},
+					"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVaultforSQL_properties_typeProperties_baseUrl')]"
 					}
 				}
 			},
@@ -130,6 +141,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+						"value": "[parameters('ls_keyvault_sql_properties_typeProperties_connectionString_secretName')]"
+					},
 					"TumblingWindowTrigger_properties_pipeline_parameters_StartDate": {
 						"value": "[parameters('TumblingWindowTrigger_properties_pipeline_parameters_StartDate')]"
 					},
@@ -140,6 +154,26 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'adf-dev-b11_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adf-dev-b11_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-dev-b11_ArmTemplate_1')]"
 			]
 		}
 	]
