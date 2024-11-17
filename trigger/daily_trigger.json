@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Daily trigger for sales",
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
@@ -24,7 +24,7 @@
 				"frequency": "Minute",
 				"interval": 10,
 				"startTime": "2024-11-13T20:33:00",
-				"endTime": "2024-12-02T20:56:00",
+				"endTime": "2024-11-17T18:56:00",
 				"timeZone": "India Standard Time"
 			}
 		}
