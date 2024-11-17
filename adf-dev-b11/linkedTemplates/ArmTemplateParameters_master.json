@@ -20,6 +20,12 @@
 		"ls_target_db_connectionString": {
 			"value": ""
 		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"value": "https://adf-keyvault-b10.vault.azure.net/"
+		},
+		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+			"value": "sql-b10-secret"
+		},
 		"ls_restapi_properties_typeProperties_url": {
 			"value": "https://reqres.in/api/users"
 		},
@@ -35,17 +41,17 @@
 		"ls_source_sql_server_properties_typeProperties_userName": {
 			"value": "ahaana"
 		},
+		"ls_system_managed_id_properties_typeProperties_server": {
+			"value": "sqldatabaseserverb11.database.windows.net"
+		},
+		"ls_system_managed_id_properties_typeProperties_database": {
+			"value": "sqldatabaseb11"
+		},
 		"TumblingWindowTrigger_properties_pipeline_parameters_StartDate": {
 			"value": "@trigger().outputs.windowStartTime"
 		},
 		"TumblingWindowTrigger_properties_pipeline_parameters_EndDate": {
 			"value": "@trigger().outputs.windowEndTime"
-		},
-		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
-			"value": "https://adf-keyvault-b10.vault.azure.net/"
-		},
-		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
-			"value": "sql-b10-secret"
 		},
 		"containerUri": {
 			"value": ""
