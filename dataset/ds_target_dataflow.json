@@ -1,0 +1,24 @@
+{
+	"name": "ds_target_dataflow",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_adls_gen2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "joinTables",
+				"folderPath": "target/dataflow",
+				"fileSystem": "sourcegen2container"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

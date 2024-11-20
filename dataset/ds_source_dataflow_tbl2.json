@@ -1,0 +1,40 @@
+{
+	"name": "ds_source_dataflow_tbl2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_source_sql_server",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobilenum",
+				"type": "nvarchar"
+			},
+			{
+				"name": "address",
+				"type": "nvarchar"
+			},
+			{
+				"name": "last_updated",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "employeesinfo"
+		}
+	}
+}
