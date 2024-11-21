@@ -1,5 +1,6 @@
 {
 	"name": "ls_system_managed_id",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
