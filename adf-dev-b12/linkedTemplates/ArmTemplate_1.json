@@ -9,32 +9,13 @@
 		},
 		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
-			"defaultValue": "sql-b10-secret"
+			"defaultValue": "sqlb10secret"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_source_tumbling')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_source_sql_server",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "sales_tumbling"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/ds_source_validation')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1105,6 +1086,174 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/ds_target_incrementalLoad')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_restAPI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "GET",
+							"headers": {},
+							"url": "https://reqres.in/apii/users?page=1"
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Web1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(1,activity('Web1').output.total_pages)",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Copy data1",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "RestSource",
+											"httpRequestTimeout": "00:01:40",
+											"requestInterval": "00.00:00:00.010",
+											"requestMethod": "GET",
+											"paginationRules": {
+												"supportRFC5988": "true"
+											}
+										},
+										"sink": {
+											"type": "DelimitedTextSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "DelimitedTextWriteSettings",
+												"quoteAllText": true,
+												"fileExtension": ".txt"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"mappings": [
+												{
+													"source": {
+														"path": "[['id']"
+													},
+													"sink": {
+														"ordinal": 1
+													}
+												},
+												{
+													"source": {
+														"path": "[['email']"
+													},
+													"sink": {
+														"ordinal": 2
+													}
+												},
+												{
+													"source": {
+														"path": "[['first_name']"
+													},
+													"sink": {
+														"ordinal": 3
+													}
+												},
+												{
+													"source": {
+														"path": "[['last_name']"
+													},
+													"sink": {
+														"ordinal": 4
+													}
+												},
+												{
+													"source": {
+														"path": "[['avatar']"
+													},
+													"sink": {
+														"ordinal": 5
+													}
+												}
+											],
+											"collectionReference": "$['data']"
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "ds_source_restAPI",
+											"type": "DatasetReference",
+											"parameters": {
+												"PageNumber": {
+													"value": "?page=@{item()}",
+													"type": "Expression"
+												}
+											}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "ds_target_restAPI",
+											"type": "DatasetReference",
+											"parameters": {
+												"APIPage": {
+													"value": "RestAPIPage@{item()}.csv",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"RestApiVariable": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2024-11-07T16:39:17Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_target_restAPI')]"
 			]
 		}
 	]
