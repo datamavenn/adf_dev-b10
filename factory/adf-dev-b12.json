@@ -1,5 +1,13 @@
 {
 	"name": "adf-dev-b12",
+	"properties": {
+		"globalParameters": {
+			"TargetContainer": {
+				"type": "string",
+				"value": "sourcegen2container"
+			}
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
