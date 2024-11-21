@@ -1,6 +1,5 @@
 {
 	"name": "ls_keyvault_sql",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
@@ -11,8 +10,9 @@
 					"referenceName": "AzureKeyVaultforSQL",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sql-b10-secret"
+				"secretName": "sqlb10secret"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }

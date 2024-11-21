@@ -1,15 +1,15 @@
 {
 	"name": "ls_system_managed_id",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "sqldatabaseserverb11.database.windows.net",
+			"server": "sqldatabaseserverb12.database.windows.net",
 			"database": "sqldatabaseb11",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
 			"authenticationType": "SystemAssignedManagedIdentity"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
