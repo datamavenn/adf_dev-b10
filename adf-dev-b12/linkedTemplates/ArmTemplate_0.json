@@ -560,7 +560,7 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "salesitems"
+					"table": "salesitemss"
 				}
 			},
 			"dependsOn": [

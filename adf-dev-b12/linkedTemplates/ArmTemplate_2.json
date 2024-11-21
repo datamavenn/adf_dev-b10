@@ -844,7 +844,7 @@
 			"properties": {
 				"description": "Daily trigger for sales",
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -859,6 +859,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "pl_restAPI",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -867,7 +874,7 @@
 						"frequency": "Minute",
 						"interval": 10,
 						"startTime": "2024-11-13T20:33:00",
-						"endTime": "2024-11-17T18:56:00",
+						"endTime": "2024-11-22T18:56:00",
 						"timeZone": "India Standard Time"
 					}
 				}

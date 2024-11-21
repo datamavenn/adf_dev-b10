@@ -868,7 +868,7 @@
 						"typeProperties": {
 							"method": "GET",
 							"headers": {},
-							"url": "https://reqres.in/apii/users?page=1"
+							"url": "https://reqres.in/api/users?page=1"
 						}
 					},
 					{
@@ -1998,7 +1998,7 @@
 				"schema": [],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "salesitems"
+					"table": "salesitemss"
 				}
 			},
 			"dependsOn": [
@@ -2652,7 +2652,7 @@
 			"properties": {
 				"description": "Daily trigger for sales",
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -2667,6 +2667,13 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "pl_restAPI",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
 				],
 				"type": "ScheduleTrigger",
@@ -2675,14 +2682,15 @@
 						"frequency": "Minute",
 						"interval": 10,
 						"startTime": "2024-11-13T20:33:00",
-						"endTime": "2024-11-17T18:56:00",
+						"endTime": "2024-11-22T18:56:00",
 						"timeZone": "India Standard Time"
 					}
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_copy_sql_table')]",
-				"[concat(variables('factoryId'), '/pipelines/pl_script')]"
+				"[concat(variables('factoryId'), '/pipelines/pl_script')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_restAPI')]"
 			]
 		},
 		{
