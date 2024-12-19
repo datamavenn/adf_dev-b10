@@ -1,6 +1,12 @@
 {
 	"name": "adf-dev-b13",
 	"properties": {
+		"globalParameters": {
+			"adls_path_prefix": {
+				"type": "string",
+				"value": "abfs://source@adlsgen2b13.dfs.core.windows.net"
+			}
+		},
 		"globalConfigurations": {
 			"PipelineBillingEnabled": "true"
 		}
