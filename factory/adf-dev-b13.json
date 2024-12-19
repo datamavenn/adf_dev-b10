@@ -1,6 +1,12 @@
 {
 	"name": "adf-dev-b13",
 	"properties": {
+		"globalParameters": {
+			"adls_path_prefix": {
+				"type": "string",
+				"value": "jhghjg"
+			}
+		},
 		"globalConfigurations": {
 			"PipelineBillingEnabled": "true"
 		}
