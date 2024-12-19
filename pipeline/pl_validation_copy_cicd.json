@@ -1,5 +1,5 @@
 {
-	"name": "pl_validation",
+	"name": "pl_validation_copy_cicd",
 	"properties": {
 		"activities": [
 			{
@@ -40,8 +40,6 @@
 				}
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2024-11-06T13:54:11Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

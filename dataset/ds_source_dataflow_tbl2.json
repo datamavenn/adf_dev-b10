@@ -1,8 +1,8 @@
 {
-	"name": "ds_target_tumbing",
+	"name": "ds_source_dataflow_tbl2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_target_db",
+			"referenceName": "ls_source_sql_server",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -14,25 +14,19 @@
 				"precision": 10
 			},
 			{
-				"name": "name",
+				"name": "location",
 				"type": "nvarchar"
 			},
 			{
-				"name": "product_type",
+				"name": "mobilenum",
 				"type": "nvarchar"
 			},
 			{
-				"name": "quantity",
-				"type": "int",
-				"precision": 10
+				"name": "address",
+				"type": "nvarchar"
 			},
 			{
-				"name": "sold_items",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "sale_date",
+				"name": "last_updated",
 				"type": "datetime",
 				"precision": 23,
 				"scale": 3
@@ -40,8 +34,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "sales_tumbling"
+			"table": "employeesinfo"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

@@ -16,6 +16,12 @@
 					"referenceName": "pl_script",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pl_restAPI",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -24,7 +30,7 @@
 				"frequency": "Minute",
 				"interval": 10,
 				"startTime": "2024-11-13T20:33:00",
-				"endTime": "2024-11-17T18:56:00",
+				"endTime": "2024-11-22T18:56:00",
 				"timeZone": "India Standard Time"
 			}
 		}

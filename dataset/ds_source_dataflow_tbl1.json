@@ -1,8 +1,8 @@
 {
-	"name": "ds_target_tumbing",
+	"name": "ds_source_dataflow_tbl1",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_target_db",
+			"referenceName": "ls_source_sql_server",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -18,21 +18,17 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "product_type",
+				"name": "dep",
 				"type": "nvarchar"
 			},
 			{
-				"name": "quantity",
-				"type": "int",
-				"precision": 10
+				"name": "salary",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
 			},
 			{
-				"name": "sold_items",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "sale_date",
+				"name": "last_updated",
 				"type": "datetime",
 				"precision": 23,
 				"scale": 3
@@ -40,8 +36,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "sales_tumbling"
+			"table": "employees"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

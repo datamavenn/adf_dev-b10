@@ -1,5 +1,5 @@
 {
-	"name": "ds_target_web",
+	"name": "ds_target_dataflow",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_source_adls_gen2",
@@ -10,16 +10,15 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "web.json",
-				"folderPath": "web",
+				"fileName": "joinTables",
+				"folderPath": "target/dataflow",
 				"fileSystem": "sourcegen2container"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "",
-			"firstRowAsHeader": false,
-			"quoteChar": ""
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
 		},
 		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

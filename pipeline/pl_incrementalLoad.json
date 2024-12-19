@@ -231,6 +231,8 @@
 		"folder": {
 			"name": "LoadTypes"
 		},
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2024-11-12T14:10:17Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

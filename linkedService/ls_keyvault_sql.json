@@ -10,8 +10,9 @@
 					"referenceName": "AzureKeyVaultforSQL",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "sql-b10-secret"
+				"secretName": "sqlb10secret"
 			}
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
