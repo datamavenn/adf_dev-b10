@@ -1,5 +1,10 @@
 {
 	"name": "adf-dev-b13",
+	"properties": {
+		"globalConfigurations": {
+			"PipelineBillingEnabled": "true"
+		}
+	},
 	"location": "eastus",
 	"identity": {
 		"type": "SystemAssigned",
