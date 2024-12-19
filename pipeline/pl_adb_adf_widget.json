@@ -1,5 +1,5 @@
 {
-	"name": "pl_adb_adf_scope",
+	"name": "pl_adb_adf_widget",
 	"properties": {
 		"activities": [
 			{
@@ -13,7 +13,14 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/ishajha1@outlook.com/ADLS-ADB-Widgets-Notebook"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"annotations": []
