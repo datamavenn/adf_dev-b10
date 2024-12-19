@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-dev-b13"
+		},
+		"ls_blob_storage_connectionString": {
+			"value": ""
+		},
+		"ls_source_adls_gen2_accountKey": {
+			"value": ""
+		},
+		"ls_source_sql_server_password": {
+			"value": ""
+		},
+		"ls_target_db_connectionString": {
+			"value": ""
+		},
+		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
+			"value": "https://adf-keyvault-b13.vault.azure.net/"
+		},
+		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
+			"value": "sqlb10secret"
+		},
+		"ls_restapi_properties_typeProperties_url": {
+			"value": "https://reqres.in/api/users"
+		},
+		"ls_source_adls_gen2_properties_typeProperties_url": {
+			"value": "https://adlsgen2b13.dfs.core.windows.net/"
+		},
+		"ls_source_sql_server_properties_typeProperties_server": {
+			"value": "sqldatabaseserverb12.database.windows.net"
+		},
+		"ls_source_sql_server_properties_typeProperties_database": {
+			"value": "sqldatabaseb11"
+		},
+		"ls_source_sql_server_properties_typeProperties_userName": {
+			"value": "ahaana"
+		},
+		"ls_system_managed_id_properties_typeProperties_server": {
+			"value": "sqldatabaseserverb12.database.windows.net"
+		},
+		"ls_system_managed_id_properties_typeProperties_database": {
+			"value": "sqldatabaseb11"
+		},
+		"TumblingWindowTrigger_properties_pipeline_parameters_StartDate": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"TumblingWindowTrigger_properties_pipeline_parameters_EndDate": {
+			"value": "@trigger().outputs.windowEndTime"
+		}
+	}
+}
