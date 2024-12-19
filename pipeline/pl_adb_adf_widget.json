@@ -15,7 +15,13 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/ishajha1@outlook.com/ADLS-ADB-Widgets-Notebook"
+					"notebookPath": "/Users/ishajha1@outlook.com/ADLS-ADB-Widgets-Notebook",
+					"baseParameters": {
+						"ADLS_Prefix": {
+							"value": "@pipeline().globalParameters.adf_path_prefix",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "ls_AzureDatabricks1",
