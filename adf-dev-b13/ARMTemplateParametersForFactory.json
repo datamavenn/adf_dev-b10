@@ -5,6 +5,9 @@
 		"factoryName": {
 			"value": "adf-dev-b13"
 		},
+		"ls_AzureDatabricks1_accessToken": {
+			"value": ""
+		},
 		"ls_blob_storage_connectionString": {
 			"value": ""
 		},
@@ -19,6 +22,9 @@
 		},
 		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
 			"value": "https://adf-keyvault-b13.vault.azure.net/"
+		},
+		"ls_AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"value": "1206-161452-nshrq968"
 		},
 		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
 			"value": "sqlb10secret"

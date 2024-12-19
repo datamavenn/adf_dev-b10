@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-dev-b13"
 		},
+		"ls_AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'ls_AzureDatabricks1'"
+		},
 		"ls_blob_storage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_storage'"
@@ -26,6 +30,10 @@
 		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://adf-keyvault-b13.vault.azure.net/"
+		},
+		"ls_AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1206-161452-nshrq968"
 		},
 		"ls_restapi_properties_typeProperties_url": {
 			"type": "string",
@@ -69,6 +77,24 @@
 				"type": "AzureKeyVault",
 				"typeProperties": {
 					"baseUrl": "[parameters('AzureKeyVaultforSQL_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_AzureDatabricks1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-3357084454880985.5.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('ls_AzureDatabricks1_accessToken')]"
+					},
+					"existingClusterId": "[parameters('ls_AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 				}
 			},
 			"dependsOn": []
@@ -169,6 +195,48 @@
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_adf_adb_widget')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Notebook1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Users/ishajha1@outlook.com/ADLS-ADB-Widgets-Notebook",
+							"baseParameters": {
+								"ADLS_Prefix": {
+									"value": "@pipeline().globalParameters.adls_path_prefix",
+									"type": "Expression"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "ls_AzureDatabricks1",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_AzureDatabricks1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/pl_script')]",
@@ -561,48 +629,6 @@
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "salesitemss"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_source_sql_server')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_source_system_manged_id')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_system_managed_id",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "iplteams"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/ls_system_managed_id')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/ds_source_tumbling')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "ls_source_sql_server",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "sales_tumbling"
 				}
 			},
 			"dependsOn": [

@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adf-dev-b13"
 		},
+		"ls_AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'ls_AzureDatabricks1'"
+		},
 		"ls_blob_storage_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_blob_storage'"
@@ -26,6 +30,10 @@
 		"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://adf-keyvault-b13.vault.azure.net/"
+		},
+		"ls_AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1206-161452-nshrq968"
 		},
 		"ls_keyvault_sql_properties_typeProperties_connectionString_secretName": {
 			"type": "string",
@@ -94,6 +102,9 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"ls_AzureDatabricks1_accessToken": {
+						"value": "[parameters('ls_AzureDatabricks1_accessToken')]"
+					},
 					"ls_blob_storage_connectionString": {
 						"value": "[parameters('ls_blob_storage_connectionString')]"
 					},
@@ -108,6 +119,9 @@
 					},
 					"AzureKeyVaultforSQL_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVaultforSQL_properties_typeProperties_baseUrl')]"
+					},
+					"ls_AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('ls_AzureDatabricks1_properties_typeProperties_existingClusterId')]"
 					},
 					"ls_restapi_properties_typeProperties_url": {
 						"value": "[parameters('ls_restapi_properties_typeProperties_url')]"
